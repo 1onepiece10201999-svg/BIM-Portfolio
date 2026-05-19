@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex Rivera — BIM Specialist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #11111a;
+    --bg3: #181825;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.13);
+    --accent: #00e5c3;
+    --accent2: #0084ff;
+    --text: #f0f0f5;
+    --muted: #888899;
+    --faint: #444455;
+    --card: #14141e;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 5vw;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 1.1rem;
+    color: var(--accent); letter-spacing: 0.04em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.875rem; font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 5vw 5rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-grid-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(0,229,195,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,195,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-glow {
+    position: absolute; top: 20%; left: 60%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(0,132,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute; bottom: 10%; left: 10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,229,195,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid rgba(0,229,195,0.3);
+    background: rgba(0,229,195,0.05);
+    color: var(--accent);
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 2rem;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800; line-height: 1.0;
+    letter-spacing: -0.03em;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  h1 span { color: var(--accent); }
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--muted); max-width: 540px;
+    margin: 1.5rem 0 2.5rem;
+    font-weight: 300;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-ctas {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #000;
+    font-weight: 500; font-size: 0.9rem;
+    padding: 0.8rem 1.75rem; border-radius: 8px;
+    text-decoration: none; transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,229,195,0.3); }
+  .btn-outline {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--border2); color: var(--text);
+    font-weight: 400; font-size: 0.9rem;
+    padding: 0.8rem 1.75rem; border-radius: 8px;
+    text-decoration: none; transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); background: rgba(0,229,195,0.05); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2rem; font-weight: 800; color: var(--text);
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* SECTIONS */
+  section { padding: 6rem 5vw; }
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  .section-tag::before {
+    content: ''; width: 24px; height: 1px; background: var(--accent);
+  }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .section-lead {
+    color: var(--muted); max-width: 540px;
+    font-size: 1.05rem; font-weight: 300;
+    margin-bottom: 3.5rem;
+  }
+  .divider {
+    border: none; border-top: 1px solid var(--border);
+    margin: 0;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-placeholder {
+    width: 100%; aspect-ratio: 4/5;
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 16px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 1rem; color: var(--faint);
+    font-size: 0.875rem;
+  }
+  .about-img-placeholder svg { width: 48px; height: 48px; opacity: 0.4; }
+  .about-badge-float {
+    position: absolute; bottom: -1.5rem; right: -1.5rem;
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 12px; padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .badge-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(0,229,195,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-size: 1.25rem;
+  }
+  .badge-text { font-size: 0.75rem; color: var(--muted); }
+  .badge-value { font-weight: 500; font-size: 0.9rem; color: var(--text); }
+
+  .about-text h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem;
+  }
+  .about-text p { color: var(--muted); font-weight: 300; margin-bottom: 1rem; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .tag {
+    font-size: 0.78rem; padding: 5px 12px; border-radius: 6px;
+    border: 1px solid var(--border2); color: var(--muted);
+    background: var(--bg3);
+  }
+
+  /* PROJECTS */
+  .projects-bg { background: var(--bg2); }
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .project-card:hover { border-color: rgba(0,229,195,0.3); transform: translateY(-4px); }
+  .project-img {
+    width: 100%; aspect-ratio: 16/9;
+    background: var(--bg3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem; color: var(--faint);
+    border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .project-img-label {
+    position: absolute; top: 1rem; left: 1rem;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid var(--border2);
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--accent);
+    padding: 4px 10px; border-radius: 100px;
+  }
+  .project-body { padding: 1.5rem; }
+  .project-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem; font-weight: 700; margin-bottom: 0.5rem;
+  }
+  .project-desc { color: var(--muted); font-size: 0.9rem; font-weight: 300; margin-bottom: 1.25rem; }
+  .project-meta { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+  .project-tag {
+    font-size: 0.7rem; padding: 3px 10px; border-radius: 100px;
+    background: rgba(0,229,195,0.08); color: var(--accent);
+    border: 1px solid rgba(0,229,195,0.2);
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-group {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem;
+  }
+  .skill-group-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem; font-weight: 700;
+    color: var(--accent); margin-bottom: 1.25rem;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .skill-item { margin-bottom: 1rem; }
+  .skill-header {
+    display: flex; justify-content: space-between;
+    font-size: 0.85rem; color: var(--text);
+    margin-bottom: 6px;
+  }
+  .skill-pct { color: var(--muted); font-size: 0.78rem; }
+  .skill-bar {
+    height: 4px; background: var(--bg3); border-radius: 100px; overflow: hidden;
+  }
+  .skill-fill {
+    height: 100%; border-radius: 100px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 1.5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid; grid-template-columns: 180px 1fr;
+    gap: 2rem; padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-date { font-size: 0.82rem; color: var(--muted); padding-top: 4px; }
+  .exp-role {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem; font-weight: 700; margin-bottom: 0.25rem;
+  }
+  .exp-company { color: var(--accent); font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .exp-desc { color: var(--muted); font-size: 0.9rem; font-weight: 300; }
+  .exp-skills { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+
+  /* CERTIFICATIONS */
+  .certs-bg { background: var(--bg2); }
+  .certs-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+  }
+  .cert-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.5rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: rgba(0,229,195,0.3); }
+  .cert-icon {
+    width: 44px; height: 44px; flex-shrink: 0;
+    border-radius: 10px; background: rgba(0,229,195,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-size: 1.25rem;
+  }
+  .cert-name { font-weight: 500; font-size: 0.95rem; margin-bottom: 0.25rem; }
+  .cert-issuer { font-size: 0.8rem; color: var(--muted); }
+  .cert-year {
+    margin-top: 0.5rem; font-size: 0.72rem;
+    color: var(--accent);
+    border: 1px solid rgba(0,229,195,0.2);
+    background: rgba(0,229,195,0.05);
+    display: inline-block; padding: 2px 8px; border-radius: 100px;
+  }
+
+  /* ACHIEVEMENTS */
+  .achievements-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem; margin-bottom: 4rem;
+  }
+  .achievement-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.75rem;
+    text-align: center;
+  }
+  .achievement-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.5rem; font-weight: 800; color: var(--accent);
+    line-height: 1;
+  }
+  .achievement-label { font-size: 0.85rem; color: var(--muted); margin-top: 0.5rem; }
+
+  /* CONTACT */
+  .contact-bg { background: var(--bg2); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: start;
+  }
+  .contact-info p { color: var(--muted); font-weight: 300; margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; text-decoration: none;
+    color: var(--text); transition: border-color 0.2s;
+  }
+  .contact-link:hover { border-color: rgba(0,229,195,0.4); }
+  .contact-link-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(0,229,195,0.08);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-size: 1.1rem; flex-shrink: 0;
+  }
+  .contact-link-text { font-size: 0.9rem; }
+  .contact-link-sub { font-size: 0.78rem; color: var(--muted); }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 0.8rem; color: var(--muted); }
+  .form-group input,
+  .form-group textarea {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.8rem 1rem;
+    color: var(--text); font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: rgba(0,229,195,0.5); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 5vw;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  footer p { font-size: 0.8rem; color: var(--muted); }
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem; font-weight: 800; color: var(--accent);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .hero-stats { gap: 2rem; }
+    nav .nav-links { display: none; }
+    .about-badge-float { position: static; margin-top: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AR.BIM</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Available for new opportunities</div>
+    <h1>Alex<br>Rivera<span>.</span></h1>
+    <p class="hero-sub">Senior BIM Specialist with 8+ years delivering intelligent, data-rich models for complex infrastructure and commercial projects across Southeast Asia.</p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects ↓</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">8<span>+</span></div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="stat-num">40<span>+</span></div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div>
+        <div class="stat-num">12<span>+</span></div>
+        <div class="stat-label">Certifications</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap">
+      <div class="about-img-placeholder">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Your Photo Here</span>
+      </div>
+      <div class="about-badge-float">
+        <div class="badge-icon">🏗️</div>
+        <div>
+          <div class="badge-value">Autodesk Certified</div>
+          <div class="badge-text">Revit Architecture & MEP</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-tag">About Me</div>
+      <h3>Turning Building Data into<br>Intelligent Models</h3>
+      <p>I'm a dedicated BIM Specialist with a passion for transforming complex architectural and engineering challenges into clear, coordinated, and data-rich digital models. My work bridges the gap between design intent and construction reality.</p>
+      <p>With deep expertise across the entire project lifecycle — from concept through handover — I help teams minimize clashes, reduce rework, and deliver projects on time and on budget.</p>
+      <p>Based in the Philippines, I've contributed to landmark infrastructure, healthcare, and commercial developments throughout Southeast Asia.</p>
+      <div class="about-tags">
+        <span class="tag">Revit</span>
+        <span class="tag">Navisworks</span>
+        <span class="tag">BIM 360</span>
+        <span class="tag">Dynamo</span>
+        <span class="tag">Civil 3D</span>
+        <span class="tag">AutoCAD</span>
+        <span class="tag">Coordination</span>
+        <span class="tag">LOD 500</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- PROJECTS -->
+<section id="projects" class="projects-bg">
+  <div class="section-tag">Projects</div>
+  <h2>Featured BIM Work</h2>
+  <p class="section-lead">A selection of projects showcasing multi-discipline coordination, federated models, and clash detection workflows.</p>
+
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-img">
+        🏢
+        <div class="project-img-label">Commercial</div>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Metro Central Tower</div>
+        <div class="project-desc">42-storey commercial tower — full MEP coordination and clash detection across architectural, structural, and mechanical disciplines using Revit and Navisworks.</div>
+        <div class="project-meta">
+          <span class="project-tag">Revit MEP</span>
+          <span class="project-tag">Navisworks</span>
+          <span class="project-tag">LOD 400</span>
+          <span class="project-tag">Clash Detection</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-img">
+        🏥
+        <div class="project-img-label">Healthcare</div>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Regional Medical Center</div>
+        <div class="project-desc">450-bed hospital complex with high-complexity MEP systems. Managed federated BIM model and coordinated 6 design teams to achieve zero critical clashes pre-construction.</div>
+        <div class="project-meta">
+          <span class="project-tag">Federated Model</span>
+          <span class="project-tag">BIM 360</span>
+          <span class="project-tag">MEP</span>
+          <span class="project-tag">LOD 500</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-img">
+        🛣️
+        <div class="project-img-label">Infrastructure</div>
+      </div>
+      <div class="project-body">
+        <div class="project-title">NLEX Interchange Expansion</div>
+        <div class="project-desc">Civil infrastructure BIM for a 3-level interchange. Delivered 3D corridor model in Civil 3D integrated with Revit structural for coordinated construction documentation.</div>
+        <div class="project-meta">
+          <span class="project-tag">Civil 3D</span>
+          <span class="project-tag">InfraWorks</span>
+          <span class="project-tag">Structural</span>
+          <span class="project-tag">4D Simulation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-img">
+        🏨
+        <div class="project-img-label">Hospitality</div>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Bayfront Resort & Casino</div>
+        <div class="project-desc">5-star resort development spanning 80,000 sqm. BIM management from schematic design to as-built, supporting facilities management handover.</div>
+        <div class="project-meta">
+          <span class="project-tag">Revit</span>
+          <span class="project-tag">Dynamo</span>
+          <span class="project-tag">FM Handover</span>
+          <span class="project-tag">COBie</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-img">
+        🏫
+        <div class="project-img-label">Education</div>
+      </div>
+      <div class="project-body">
+        <div class="project-title">University Campus Master Plan</div>
+        <div class="project-desc">BIM standards and template development for a 12-building campus rollout. Established BIM Execution Plan, naming conventions, and Dynamo automation scripts.</div>
+        <div class="project-meta">
+          <span class="project-tag">BEP</span>
+          <span class="project-tag">Standards</span>
+          <span class="project-tag">Dynamo</span>
+          <span class="project-tag">Template Dev</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-img">
+        🚆
+        <div class="project-img-label">Transit</div>
+      </div>
+      <div class="project-body">
+        <div class="project-title">Metro Rail Extension</div>
+        <div class="project-desc">Underground station design and tunnel coordination using OpenBIM workflows. IFC export and multi-software interoperability between Revit, ArchiCAD, and Bentley.</div>
+        <div class="project-meta">
+          <span class="project-tag">OpenBIM</span>
+          <span class="project-tag">IFC</span>
+          <span class="project-tag">Bentley</span>
+          <span class="project-tag">Underground</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-tag">Skills & Software</div>
+  <h2>Technical Expertise</h2>
+  <p class="section-lead">Proficiency across the full BIM technology stack — from authoring tools to coordination and automation platforms.</p>
+
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="skill-group-title">Authoring</div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Revit (Architecture)</span><span class="skill-pct">98%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:98%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Revit (MEP)</span><span class="skill-pct">92%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:92%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Revit (Structure)</span><span class="skill-pct">85%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Civil 3D</span><span class="skill-pct">80%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>AutoCAD</span><span class="skill-pct">95%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:95%"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Coordination</div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Navisworks Manage</span><span class="skill-pct">97%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:97%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>BIM 360 / ACC</span><span class="skill-pct">90%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Clash Detection</span><span class="skill-pct">96%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:96%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>4D Scheduling</span><span class="skill-pct">78%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>IFC / OpenBIM</span><span class="skill-pct">88%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Automation & Viz</div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Dynamo</span><span class="skill-pct">85%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Enscape / Lumion</span><span class="skill-pct">82%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Power BI (BIM Data)</span><span class="skill-pct">70%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Bluebeam Revu</span><span class="skill-pct">88%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Python (Revit API)</span><span class="skill-pct">65%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">BIM Management</div>
+      <div class="skill-item">
+        <div class="skill-header"><span>BEP Development</span><span class="skill-pct">93%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:93%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>LOD Standards</span><span class="skill-pct">97%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:97%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Template Creation</span><span class="skill-pct">91%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:91%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>COBie / FM Handover</span><span class="skill-pct">80%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>ISO 19650</span><span class="skill-pct">86%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="width:86%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-tag">Work Experience</div>
+  <h2>Career History</h2>
+  <p class="section-lead">Eight years of progressive experience across architecture, engineering, and construction firms.</p>
+
+  <div class="exp-list">
+
+    <div class="exp-item">
+      <div class="exp-date">2021 — Present</div>
+      <div>
+        <div class="exp-role">Senior BIM Specialist</div>
+        <div class="exp-company">Global AEC Consultants, Inc. — Manila, PH</div>
+        <div class="exp-desc">Lead BIM Specialist for multi-discipline projects valued at over ₱5B. Manage federated models, chair weekly clash detection meetings, and mentor a team of 6 junior modelers. Developed firm-wide BIM standards and Revit template library.</div>
+        <div class="exp-skills">
+          <span class="tag">Revit</span><span class="tag">Navisworks</span><span class="tag">BIM 360</span><span class="tag">Dynamo</span><span class="tag">BEP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">2018 — 2021</div>
+      <div>
+        <div class="exp-role">BIM Coordinator</div>
+        <div class="exp-company">Archidesign Partners — Makati, PH</div>
+        <div class="exp-desc">Coordinated BIM deliverables for commercial and hospitality projects. Conducted clash detection reviews, produced construction documentation, and supported design teams in model quality assurance.</div>
+        <div class="exp-skills">
+          <span class="tag">Revit</span><span class="tag">AutoCAD</span><span class="tag">Clash Detection</span><span class="tag">CD Production</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">2016 — 2018</div>
+      <div>
+        <div class="exp-role">BIM Modeler</div>
+        <div class="exp-company">BuildTech Engineering Services — Quezon City, PH</div>
+        <div class="exp-desc">Produced architectural and structural Revit models for residential and institutional projects. Responsible for model setup, family creation, and drawing sheet production.</div>
+        <div class="exp-skills">
+          <span class="tag">Revit</span><span class="tag">AutoCAD</span><span class="tag">Family Creation</span><span class="tag">Modeling</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CERTIFICATIONS -->
+<section id="certifications" class="certs-bg">
+  <div class="section-tag">Certifications</div>
+  <h2>Professional Credentials</h2>
+  <p class="section-lead">Industry-recognized certifications demonstrating technical depth and commitment to professional development.</p>
+
+  <div class="certs-grid">
+    <div class="cert-card">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">Autodesk Certified Professional — Revit for Architectural Design</div>
+        <div class="cert-issuer">Autodesk</div>
+        <div class="cert-year">2023</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">Autodesk Certified Professional — Revit for MEP</div>
+        <div class="cert-issuer">Autodesk</div>
+        <div class="cert-year">2022</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📜</div>
+      <div>
+        <div class="cert-name">BIM Level 2 Certification (ISO 19650)</div>
+        <div class="cert-issuer">BRE Academy</div>
+        <div class="cert-year">2022</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📜</div>
+      <div>
+        <div class="cert-name">Navisworks Manage — Advanced Clash Detection</div>
+        <div class="cert-issuer">Autodesk Authorized Training Center</div>
+        <div class="cert-year">2021</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">Autodesk Civil 3D — Infrastructure Design</div>
+        <div class="cert-issuer">Autodesk</div>
+        <div class="cert-year">2020</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📜</div>
+      <div>
+        <div class="cert-name">Certified Associate in Project Management (CAPM)</div>
+        <div class="cert-issuer">PMI</div>
+        <div class="cert-year">2020</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-tag">Project Achievements</div>
+  <h2>Impact by the Numbers</h2>
+  <p class="section-lead">Quantifiable outcomes from BIM coordination and model management across project portfolios.</p>
+
+  <div class="achievements-grid">
+    <div class="achievement-card">
+      <div class="achievement-num">₱5B+</div>
+      <div class="achievement-label">Total Project Value Managed</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-num">4,200+</div>
+      <div class="achievement-label">Clashes Resolved Pre-Construction</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-num">35%</div>
+      <div class="achievement-label">RFI Reduction via BIM Coordination</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-num">40+</div>
+      <div class="achievement-label">Projects Delivered on Time</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-num">6</div>
+      <div class="achievement-label">Junior BIM Modelers Mentored</div>
+    </div>
+    <div class="achievement-card">
+      <div class="achievement-num">LOD 500</div>
+      <div class="achievement-label">Maximum Detail Level Achieved</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONTACT -->
+<section id="contact" class="contact-bg">
+  <div class="section-tag">Contact</div>
+  <h2>Let's Work Together</h2>
+
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p>Open to new opportunities in BIM management, coordination, and infrastructure projects. Whether you're a recruiter, project owner, or fellow BIM professional — I'd love to connect.</p>
+      <div class="contact-links">
+        <a href="mailto:alex.rivera@email.com" class="contact-link">
+          <div class="contact-link-icon">✉️</div>
+          <div>
+            <div class="contact-link-text">alex.rivera@email.com</div>
+            <div class="contact-link-sub">Email — preferred</div>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/alexrivera-bim" class="contact-link">
+          <div class="contact-link-icon">💼</div>
+          <div>
+            <div class="contact-link-text">linkedin.com/in/alexrivera-bim</div>
+            <div class="contact-link-sub">LinkedIn Profile</div>
+          </div>
+        </a>
+        <a href="tel:+639171234567" class="contact-link">
+          <div class="contact-link-icon">📱</div>
+          <div>
+            <div class="contact-link-text">+63 917 123 4567</div>
+            <div class="contact-link-sub">Mobile / WhatsApp</div>
+          </div>
+        </a>
+        <div class="contact-link" style="cursor:default;">
+          <div class="contact-link-icon">📍</div>
+          <div>
+            <div class="contact-link-text">Manila, Philippines</div>
+            <div class="contact-link-sub">Open to local & remote work</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="contact-form">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="John Smith">
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="john@company.com">
+        </div>
+        <div class="form-group">
+          <label>Company / Organization</label>
+          <input type="text" placeholder="AEC Firm Ltd.">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea placeholder="Tell me about your project or opportunity..."></textarea>
+        </div>
+        <button class="btn-primary" style="align-self:flex-start;" onclick="alert('Portfolio demo — connect your backend or Formspree to enable form submission!')">Send Message →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">AR.BIM</div>
+  <p>© 2026 Alex Rivera — BIM Specialist. Built for Vercel deployment.</p>
+  <p style="font-size:0.78rem; color: var(--faint);">Manila, Philippines</p>
+</footer>
+
+<script>
+  const fills = document.querySelectorAll('.skill-fill');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.width = e.target.style.width;
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  fills.forEach(f => {
+    const w = f.style.width;
+    f.style.width = '0';
+    setTimeout(() => observer.observe(f), 100);
+    f.addEventListener('transitionend', () => {}, { once: true });
+    const io2 = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) { f.style.width = w; io2.unobserve(f); }
+    }, { threshold: 0.1 });
+    io2.observe(f);
+  });
+</script>
+
+</body>
+</html>
